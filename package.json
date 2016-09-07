@@ -1,0 +1,24 @@
+{
+  "name": "webpack-sprockets-manifest-plugin",
+  "version": "1.0.0",
+  "description": "A Webpack plugin which allows Sprockets to load files from a Webpack build",
+  "main": "index.js",
+  "scripts": {
+    "test": "todo tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rupurt/webpack-sprockets-manifest-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "sprockets",
+    "rails"
+  ],
+  "author": "Alex Kwiatkowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rupurt/webpack-sprockets-manifest-plugin/issues"
+  },
+  "homepage": "https://github.com/rupurt/webpack-sprockets-manifest-plugin#readme"
+}
