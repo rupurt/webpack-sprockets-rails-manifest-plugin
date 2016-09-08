@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/rupurt/webpack-sprockets-manifest-plugin/issues"
   },
-  "homepage": "https://github.com/rupurt/webpack-sprockets-manifest-plugin#readme"
+  "homepage": "https://github.com/rupurt/webpack-sprockets-manifest-plugin#readme",
+  "dependencies": {
+    "fs-extra": "^0.30.0"
+  }
 }
