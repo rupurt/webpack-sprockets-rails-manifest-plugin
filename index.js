@@ -6,14 +6,14 @@ var DEFAULT_PARAMS = {
   statsFile: "webpack-stats.json"
 };
 
-function WebpackSprocketsManifestPlugin(options) {
+function WebpackSprocketsRailsManifestPlugin(options) {
   var params = options || {};
 
   this._manifestFile = params.manifestFile || DEFAULT_PARAMS.manifestFile;
   this._statsFile = params.statsFile || DEFAULT_PARAMS.statsFile;
 }
 
-WebpackSprocketsManifestPlugin.prototype.apply = function(compiler) {
+WebpackSprocketsRailsManifestPlugin.prototype.apply = function(compiler) {
   var manifestFile = this._manifestFile;
   var statsFile = this._statsFile;
   var sprockets = {
@@ -51,4 +51,4 @@ WebpackSprocketsManifestPlugin.prototype.apply = function(compiler) {
   });
 };
 
-module.exports = WebpackSprocketsManifestPlugin;
+module.exports = WebpackSprocketsRailsManifestPlugin;

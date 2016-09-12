@@ -1,26 +1,27 @@
 {
-  "name": "webpack-sprockets-manifest-plugin",
+  "name": "webpack-sprockets-rails-manifest-plugin",
   "version": "1.0.0",
-  "description": "A Webpack plugin which allows Sprockets to load files from a Webpack build",
+  "description": "A Webpack plugin which allows [`sprockets-rails`](https://github.com/rails/sprockets-rails) to find files from a Webpack build without loading them via the asset pipeline.",
   "main": "index.js",
   "scripts": {
     "test": "todo tests"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rupurt/webpack-sprockets-manifest-plugin.git"
+    "url": "git+https://github.com/rupurt/webpack-sprockets-rails-manifest-plugin.git"
   },
   "keywords": [
     "webpack",
     "sprockets",
-    "rails"
+    "rails",
+    "sprockets-rails"
   ],
-  "author": "Alex Kwiatkowski",
+  "author": "Alex Kwiatkowski <alex+git@rival-studios.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rupurt/webpack-sprockets-manifest-plugin/issues"
+    "url": "https://github.com/rupurt/webpack-sprockets-rails-manifest-plugin/issues"
   },
-  "homepage": "https://github.com/rupurt/webpack-sprockets-manifest-plugin#readme",
+  "homepage": "https://github.com/rupurt/webpack-sprockets-rails-manifest-plugin#README.md",
   "dependencies": {
     "fs-extra": "^0.30.0"
   }
