@@ -25,7 +25,15 @@ WebpackSprocketsRailsManifestPlugin.prototype.apply = function(compiler) {
     var statsJson = stats.toJson();
     var chunks = statsJson.chunks;
     var webpackContext = compiler.options.context;
-    var outputPath = compiler.options.output.path;
+    var devServer = compiler.options.devServer;
+    var outputPath;
+
+    if (devServer && devServer.contentBase) {
+      outputPath = devServer.contentBase;
+    } else {
+      outputPath = compiler.options.output.path;
+    }
+
     var outputDest = webpackContext + "/" + outputPath;
     var manifestDest = outputDest + "/" + manifestFile;
 
