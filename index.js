@@ -24,7 +24,6 @@ WebpackSprocketsRailsManifestPlugin.prototype.apply = function(compiler) {
   compiler.plugin("done", function(stats) {
     var statsJson = stats.toJson();
     var chunks = statsJson.chunks;
-    var webpackContext = compiler.options.context;
     var devServer = compiler.options.devServer;
     var outputPath;
 
@@ -34,28 +33,33 @@ WebpackSprocketsRailsManifestPlugin.prototype.apply = function(compiler) {
       outputPath = compiler.options.output.path;
     }
 
-    var outputDest = webpackContext + "/" + outputPath;
-    var manifestDest = outputDest + "/" + manifestFile;
+    var outputDest = outputPath;
+    var manifestPath = outputDest + "/" + manifestFile;
 
     chunks.forEach(function(chunk) {
-      var bundleName = chunk.names[0];
-      var chunkHashFileName = chunk.files[0];
-      var logicalPath = bundleName + ".js";
-      var chunkDest = outputDest + "/" + chunkHashFileName;
-      var mtime = fs.statSync(chunkDest).mtime.toISOString();
+      var chunkFilename = chunk.files[0];
+      var chunkPath = outputDest + "/" + chunkFilename;
+      var chunkExtension = chunkFilename.split(".").pop();
+      var logicalPath = chunk.names[0] + "." + chunkExtension;
 
-      sprockets.assets[logicalPath] = chunkHashFileName;
-      sprockets.files[chunkHashFileName] = {
-        "logical_path": logicalPath,
-        "mtime": mtime,
-        "size": chunk.size,
-        "digest": chunk.hash,
-        // TODO
-        // "integrity": "sha256-Zk2O+Q1SFSuzslxNc6LuqFrAN5PlRHlbKeGzXfN4Xmc="
-      };
+      if (fs.existsSync(chunkPath)) {
+        var mtime = fs.statSync(chunkPath).mtime.toISOString();
+
+        sprockets.files[chunkFilename] = {
+          "logical_path": logicalPath,
+          "mtime": mtime,
+          "size": chunk.size,
+          "digest": chunk.hash,
+          // TODO
+          // "integrity": "sha256-Zk2O+Q1SFSuzslxNc6LuqFrAN5PlRHlbKeGzXfN4Xmc="
+        };
+        sprockets.assets[logicalPath] = chunkFilename;
+      } else {
+        console.warn("[webpack-sprockets-rails-manifest-plugin] file does not exist: %o", chunkPath);
+      }
     });
 
-    fse.outputFileSync(manifestDest, JSON.stringify(sprockets, null, "  "));
+    fse.outputFileSync(manifestPath, JSON.stringify(sprockets, null, "  "));
   });
 };
 
