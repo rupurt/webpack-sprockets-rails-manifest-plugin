@@ -131,10 +131,10 @@ system through the environment strategy.
 
 TODO
 ----
+* [x] - support webpack-dev-server
 * [ ] - sample project
 * [ ] - gradual migration documentation
 * [ ] - tests
-* [ ] - support webpack-dev-server
 * [ ] - [`script` integrity](https://w3c.github.io/webappsec-subresource-integrity)
 
 License
