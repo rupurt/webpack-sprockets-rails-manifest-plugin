@@ -167,12 +167,22 @@ If `Rails.configuration.assets.compile = true` the asset pipeline will check the
 manifest first, if an entry can't be found, it falls back and checks the file 
 system through the environment strategy.
 
+Examples
+--------
+
+Head over to [https://github.com/rupurt/react_on_rails_simplified_configuration_examples](https://github.com/rupurt/react_on_rails_simplified_configuration_examples)
+for examples on how to configure:
+
+* Greenfield Rails projects
+* Legacy Rails projects
+* Hot Module Replacement
+
 TODO
 ----
 * [x] - support webpack-dev-server
+* [x] - gradual migration documentation
+* [x] - sample projects
 * [ ] - tests
-* [ ] - sample projects
-* [ ] - gradual migration documentation
 * [ ] - [`script` integrity](https://w3c.github.io/webappsec-subresource-integrity)
 
 License
