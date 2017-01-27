@@ -1,8 +1,10 @@
 Webpack Sprockets Rails Manifest Plugin
 =======================================
 
-A webpack plugin that allows [`sprockets-rails`](https://github.com/rails/sprockets-rails) 
-to find files from a webpack build without loading them via the asset pipeline.
+A Webpack plugin that allows [`sprockets-rails`](https://github.com/rails/sprockets-rails) 
+to find static assets from a Webpack build without requiring them in sprockets directives. 
+We can leverage standard Rails view helpers (i.e. `javascript_include_tag`, `stylesheet_link_tag`) 
+to load artifacts supporting finger printing and prepended host urls.
 
 Install
 -------
