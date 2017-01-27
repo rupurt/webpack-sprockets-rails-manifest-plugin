@@ -119,6 +119,17 @@ Rails.application.config.action_controller.asset_host = proc { |source, _request
 }
 ```
 
+Gradually Replacing the Asset Pipeline with Webpack
+---------------------------------------------------
+
+The Webpack ecosystem works best when it controls a whole subpath. For greenfield 
+projects this is easy to achieve. However if you're running a legacy Rails app, don't
+fret! Webpack can copy build files into a location so that they can be required via 
+sprockets directives. We recommend using this technique when you're just getting started,
+but the end goal should be to have Webpack completely control the build process 
+of your static assets. For more information and setup instructions check out the
+separate plugin [`webpack-copy-after-build-plugin`](https://github.com/rupurt/webpack-copy-after-build-plugin).
+
 How Does It Work?
 -----------------
 
