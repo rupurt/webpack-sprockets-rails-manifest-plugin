@@ -106,19 +106,19 @@ the Rails view helpers. This option is normally configured for production enviro
 but we can use it in development to load assets from `webpack-dev-server` instead of 
 public.
 
+```sh
+export ASSET_HOST=http://localhost:8080
+```
+
 ```ruby
 # config/application.rb
-ENV["ASSET_HOST"] = "http://localhost:8080"
+# ...
 
-Rails.application.config.action_controller.asset_host = proc { |source, _request|
-  if Rails.env.development?
-    if source =~ /-bundle/
-      ENV["ASSET_HOST"]
-    end
-  else
+if ENV["ASSET_HOST"].present?
+  Rails.application.config.action_controller.asset_host = proc { |source, _request|
     ENV["ASSET_HOST"]
-  end
-}
+  }
+end
 ```
 
 Gradually Replacing the Asset Pipeline with Webpack
