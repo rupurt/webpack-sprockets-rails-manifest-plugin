@@ -33,33 +33,33 @@ WebpackSprocketsRailsManifestPlugin.prototype.apply = function(compiler) {
       outputPath = compiler.options.output.path;
     }
 
-    var outputDest = outputPath;
-    var manifestPath = outputDest + "/" + manifestFile;
+    var manifestPath = outputPath + "/" + manifestFile;
 
     chunks.forEach(function(chunk) {
       var chunkFilename = chunk.files[0];
-      var chunkPath = outputDest + "/" + chunkFilename;
+      var chunkPath = outputPath + "/" + chunkFilename;
       var chunkExtension = chunkFilename.split(".").pop();
       var logicalPath = chunk.names[0] + "." + chunkExtension;
+      var mtime;
 
       if (fs.existsSync(chunkPath)) {
-        var mtime = fs.statSync(chunkPath).mtime.toISOString();
-
-        sprockets.files[chunkFilename] = {
-          "logical_path": logicalPath,
-          "mtime": mtime,
-          "size": chunk.size,
-          "digest": chunk.hash,
-          // TODO
-          // "integrity": "sha256-Zk2O+Q1SFSuzslxNc6LuqFrAN5PlRHlbKeGzXfN4Xmc="
-        };
-        sprockets.assets[logicalPath] = chunkFilename;
+        mtime = fs.statSync(chunkPath).mtime;
       } else {
-        console.warn("[webpack-sprockets-rails-manifest-plugin] file does not exist: %o", chunkPath);
+        mtime = new Date();
       }
+
+      sprockets.files[chunkFilename] = {
+        "logical_path": logicalPath,
+        "mtime": mtime.toISOString(),
+        "size": chunk.size,
+        "digest": chunk.hash,
+        // TODO
+        // "integrity": "sha256-Zk2O+Q1SFSuzslxNc6LuqFrAN5PlRHlbKeGzXfN4Xmc="
+      };
+      sprockets.assets[logicalPath] = chunkFilename;
     });
 
-    fse.mkdirpSync(outputDest);
+    fse.mkdirpSync(outputPath);
     fse.outputFileSync(manifestPath, JSON.stringify(sprockets, null, "  "));
   });
 };
