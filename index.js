@@ -59,6 +59,7 @@ WebpackSprocketsRailsManifestPlugin.prototype.apply = function(compiler) {
       }
     });
 
+    fse.mkdirpSync(outputDest);
     fse.outputFileSync(manifestPath, JSON.stringify(sprockets, null, "  "));
   });
 };
