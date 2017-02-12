@@ -22,6 +22,11 @@ Usage
 Rails.configuration.assets.manifest = Rails.root.join("config", "sprockets-manifest.json")
 ```
 
+```ruby
+# config/environments/development.rb
+config.assets.debug = false
+```
+
 ```erb
 <% # app/views/layouts/application.html.erb %>
 <% # Use rails helpers in the same way you normally would with sprockets %>
@@ -163,7 +168,7 @@ To get `sprockets-rails` and `webpack` talking to each other we need to
 configure `sprockets-rails` to write it's manifest file to a static location 
 that `webpack` knows about.
 
-If `Rails.configuration.assets.compile = true` the asset pipeline will check the 
+If `Rails.configuration.assets.debug = false` the asset pipeline will check the 
 manifest first, if an entry can't be found, it falls back and checks the file 
 system through the environment strategy.
 
