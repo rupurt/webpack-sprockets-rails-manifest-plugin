@@ -36,27 +36,28 @@ WebpackSprocketsRailsManifestPlugin.prototype.apply = function(compiler) {
     var manifestPath = outputPath + "/" + manifestFile;
 
     chunks.forEach(function(chunk) {
-      var chunkFilename = chunk.files[0];
-      var chunkPath = outputPath + "/" + chunkFilename;
-      var chunkExtension = chunkFilename.split(".").pop();
-      var logicalPath = chunk.names[0] + "." + chunkExtension;
-      var mtime;
+      chunk.files.forEach(function (chunkFilename) {
+        var chunkPath = outputPath + "/" + chunkFilename;
+        var chunkExtension = chunkFilename.split(".").pop();
+        var logicalPath = chunk.names[0] + "." + chunkExtension;
+        var mtime;
 
-      if (fs.existsSync(chunkPath)) {
-        mtime = fs.statSync(chunkPath).mtime;
-      } else {
-        mtime = new Date();
-      }
+        if (fs.existsSync(chunkPath)) {
+          mtime = fs.statSync(chunkPath).mtime;
+        } else {
+          mtime = new Date();
+        }
 
-      sprockets.files[chunkFilename] = {
-        "logical_path": logicalPath,
-        "mtime": mtime.toISOString(),
-        "size": chunk.size,
-        "digest": chunk.hash,
-        // TODO
-        // "integrity": "sha256-Zk2O+Q1SFSuzslxNc6LuqFrAN5PlRHlbKeGzXfN4Xmc="
-      };
-      sprockets.assets[logicalPath] = chunkFilename;
+        sprockets.files[chunkFilename] = {
+          "logical_path": logicalPath,
+          "mtime": mtime.toISOString(),
+          "size": chunk.size,
+          "digest": chunk.hash,
+          // TODO
+          // "integrity": "sha256-Zk2O+Q1SFSuzslxNc6LuqFrAN5PlRHlbKeGzXfN4Xmc="
+        };
+        sprockets.assets[logicalPath] = chunkFilename;
+      });
     });
 
     fse.mkdirpSync(outputPath);
