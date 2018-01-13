@@ -75,11 +75,11 @@ var config = {
   // Other config ...
 
   plugins: [
-    new WebpackSprocketsRailsManifestPlugin(
+    new WebpackSprocketsRailsManifestPlugin({
       // [optional] this is the default location relative to the output directory 
       // that the assets will be built. e.g `public/assets`
       manifestFile: "../../config/sprockets-manifest.json"
-    )
+    })
   ]
 };
 
