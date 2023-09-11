@@ -13,7 +13,7 @@ function WebpackSprocketsRailsManifestPlugin(options) {
   this._statsFile = params.statsFile || DEFAULT_PARAMS.statsFile;
 }
 
-WebpackSprocketsRailsManifestPlugin.prototype.apply = function(compiler) {
+WebpackSprocketsRailsManifestPlugin.prototype.apply = function (compiler) {
   var manifestFile = this._manifestFile;
   var statsFile = this._statsFile;
   var sprockets = {
@@ -21,7 +21,7 @@ WebpackSprocketsRailsManifestPlugin.prototype.apply = function(compiler) {
     assets: {}
   };
 
-  compiler.plugin("done", function(stats) {
+  compiler.hooks.done.tap("WebpackSprocketsRailsManifestPlugin", function (stats) {
     var statsJson = stats.toJson();
     var chunks = statsJson.chunks;
     var devServer = compiler.options.devServer;
@@ -35,7 +35,7 @@ WebpackSprocketsRailsManifestPlugin.prototype.apply = function(compiler) {
 
     var manifestPath = outputPath + "/" + manifestFile;
 
-    chunks.forEach(function(chunk) {
+    chunks.forEach(function (chunk) {
       chunk.files.forEach(function (chunkFilename) {
         var chunkPath = outputPath + "/" + chunkFilename;
         var chunkExtension = chunkFilename.split(".").pop();

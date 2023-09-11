@@ -1,6 +1,6 @@
 {
   "name": "webpack-sprockets-rails-manifest-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A webpack plugin that allows [`sprockets-rails`](https://github.com/rails/sprockets-rails) to find files from a Webpack build without loading them via the asset pipeline.",
   "main": "index.js",
   "scripts": {
